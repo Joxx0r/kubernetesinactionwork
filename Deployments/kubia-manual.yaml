@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia-deployment
+  labels:
+    creation_method: manual
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: prod
+  template:
+    metadata:
+      labels:
+        creation_method: manual
+        env: prod
+        app: kubia
+    spec:
+      containers:
+        - name: kubia
+          image: joxxorr/kubia
+          ports:
+            - containerPort: 8080

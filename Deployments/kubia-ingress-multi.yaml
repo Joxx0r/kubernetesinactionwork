@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Ingress
+metadata:
+  name: kubia
+spec:
+  rules:
+  - host: kubia.example.com
+    http:
+      paths:
+      - path: /kubia
+        pathType: Prefix
+        backend:
+          service:
+            name: kubia-loadbalancer
+            port:
+              number: 80
+  - host: foo.example.com
+    http:
+      paths:
+      - path: /foo
+        pathType: Prefix
+        backend:
+          service:
+            name: kubia-loadbalancer
+            port:
+              number: 80

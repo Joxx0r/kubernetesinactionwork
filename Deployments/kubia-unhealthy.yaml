@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia-liveness
+  labels:
+    creation_method: manual
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: prod
+  template:
+    metadata:
+      labels:
+        creation_method: manual
+        env: prod
+    spec:
+      containers:
+        - name: kubia
+          image: joxxorr/kubia-unhealthy
+          livenessProbe: 
+            httpGet: 
+              path: / 
+              port: 8080
+            initialDelaySeconds: 15
+          ports:
+            - containerPort: 8080
